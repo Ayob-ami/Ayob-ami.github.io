@@ -1,0 +1,376 @@
+/portfolio.html -->
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayomide | ML Engineer</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        [data-aos] {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        [data-aos].aos-animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Keep all existing styles */
+        :root[data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f3f4f6;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --accent: #4f46e5;
+            --card-bg: #ffffff;
+            --card-border: #e5e7eb;
+            --nav-bg: rgba(255, 255, 255, 0.8);
+        }
+
+        :root[data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --accent: #818cf8;
+            --card-bg: #1e293b;
+            --card-border: #2d3748;
+            --nav-bg: rgba(15, 23, 42, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: var(--bg-primary);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--accent), #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+        }
+
+        .skill-card h3 {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-card ul {
+            list-style: none;
+            color: var(--text-secondary);
+        }
+
+        .skill-card li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .skill-card li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            transition: transform 0.3s;
+        }
+
+        .project:hover {
+            transform: translateY(-5px);
+        }
+
+        .project h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .project p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .project a {
+            color: var(--accent);
+            text-decoration: none;
+            padding: 0.5rem 0;
+            display: inline-block;
+        }
+
+        #contact {
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+        }
+
+        #contact a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        #contact p {
+            margin: 1rem 0;
+            color: var(--text-secondary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--card-bg);
+            color: var(--text-secondary);
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+        /* All your existing styles remain unchanged */
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" aria-label="Toggle theme" data-aos="fade-left">🌗</button>
+    
+    <nav data-aos="fade-down">
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero" data-aos="fade-up">
+        <h1>Adewuyi Thanni Ayomide</h1>
+        <p>Machine Learning Engineer | Data Scientist | AI Engineer</p>
+    </div>
+
+    <section id="about" data-aos="fade-up">
+        <h2>About Me</h2>
+        <p style="color: var(--text-secondary); font-size: 1.2rem; max-width: 800px;">
+            I am a passionate technology professional specializing in Machine Learning, Data Science, and Artificial Intelligence. 
+            With a deep understanding of cutting-edge AI technologies and data analysis, I create innovative solutions that transform complex data into actionable insights.
+        </p>
+    </section>
+
+    <section id="skills">
+        <h2 data-aos="fade-up">What I Do</h2>
+        <div class="skills">
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Machine Learning Engineering</h3>
+                <ul>
+                    <li>Deep Learning Model Development</li>
+                    <li>Traditional Machine Learning Model Development</li>
+                    <li>Model Optimization & Deployment</li>
+                    <li>Performance Optimization</li>
+                </ul>
+            </div>
+            
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>Data Science</h3>
+                <ul>
+                    <li>Statistical Analysis</li>
+                    <li>Predictive Modeling</li>
+                    <li>Data Visualization</li>
+                    <li>Feature Engineering</li>
+                </ul>
+            </div>
+            
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
+                <h3>AI Engineering</h3>
+                <ul>
+                    <li>Natural Language Processing</li>
+                    <li>Computer Vision</li>
+                    <li>Large Language Models</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 data-aos="fade-up">Projects</h2>
+        <div class="projects-grid">
+            <div class="project" data-aos="fade-up" data-aos-delay="100">
+                <h3>AI Poetry Generator</h3>
+                <p>A sophisticated AI system that creates original poetry using prompt engineering.</p>
+                <a href="https://github.com/Ayob-ami/Poem-Generator-Chatbot" target="_blank">View Project →</a>
+            </div>
+            <div class="project" data-aos="fade-up" data-aos-delay="200">
+                <h3>CO2 Emission Prediction</h3>
+                <p>Machine learning model that accurately forecasts carbon emissions using historical data and environmental factors.</p>
+                <a href="https://github.com/Ayob-ami/Co2-emissions-prediction" target="_blank">View Project →</a>
+            </div>
+            <div class="project" data-aos="fade-up" data-aos-delay="300">
+                <h3>LangChain Chatbot</h3>
+                <p>An intelligent chatbot leveraging the ReAct framework for enhanced conversational abilities.</p>
+                <a href="https://github.com/Ayob-ami/AI-agent-using-ReAct" target="_blank">View Project →</a>
+            </div>
+        </div>
+    </section>
+    <section id="contact" data-aos="fade-up">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:adewuyithanniayomide@gmail.com">adewuyithanniayomide@gmail.com</a></p>
+        <p>GitHub: <a href="https://github.com/Ayob-ami" target="_blank">Ayob-ami</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/thanni-adewuyi-8aaa47291" target="_blank">LinkedIn Profile</a></p>
+    </section>
+
+    <footer data-aos="fade-up">
+        <p>© 2025 Adewuyi Thanni Ayomide. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: false,
+            mirror: true,
+            offset: 100
+        });
+
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const html = document.documentElement;
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            themeToggle.innerHTML = newTheme === 'dark' ? '🌗' : '☀️';
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
